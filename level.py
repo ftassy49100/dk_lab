@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import os
 import pygame
-from wall import *
-from banana import *
-from perso import *
-from empty import *
-from start import *
+from entities.banana import *
+from entities.wall import *
+from entities.empty import *
+from entities.perso import *
+from entities.start import *
 from pygame.locals import *
 from constantes import background, wall, banana, start
 
@@ -17,7 +17,7 @@ class Level():
 	step = 32
 	def __init__(self, niveau): #constructeur d'exercice : numéro de niveau
 		self.niveau = niveau
-		fichier = "level/level%s.txt" % self.niveau
+		fichier = "resources/level/level%s.txt" % self.niveau
 		self.fichier = open(fichier, "r")
 		self.map = []
 		self.banane = Banana()

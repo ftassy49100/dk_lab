@@ -6,7 +6,7 @@ from pygame.locals import *
 from constantes import *
 
 class Banana(Entity):
-	"""Classe définissant un mur
+	"""Classe définissant une banane
 	"""
 
 	step = 32
