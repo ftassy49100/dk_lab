@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import pygame
-from entity import *
+from entities.entity import *
 from pygame.locals import *
 from constantes import *
 

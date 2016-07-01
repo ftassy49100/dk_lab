@@ -6,6 +6,7 @@ from entities.wall import *
 from entities.empty import *
 from entities.perso import *
 from entities.start import *
+from entities.ennemy import *
 from pygame.locals import *
 from constantes import background, wall, banana, start
 
@@ -21,6 +22,8 @@ class Level():
 		self.fichier = open(fichier, "r")
 		self.map = []
 		self.banane = Banana()
+		self.ennemy = Ennemy(self)
+		self.perso = Perso(self)
 		lignes  = self.fichier.readlines()
 		for x, line in enumerate(lignes):
 			self.map.append([])
@@ -31,14 +34,20 @@ class Level():
 					self.banane.x = y
 					self.banane.y = x
 					self.map[x].append(self.banane)
+				elif char == "E":
+					self.ennemy.x = y
+					self.ennemy.y = x
+					self.map[x].append(Empty())
 				elif char == "S":
 					self.map[x].append(Start())
+					self.perso.x = x
+					self.perso.y = y
 				else:
 					self.map[x].append(Empty())
 
 
 
-	def display_room(self, fenetre, perso):
+	def display_room(self, fenetre, perso, ennemy):
 		disp_fond = pygame.image.load(background).convert_alpha()
 		fenetre.blit(disp_fond, (0,0))
 		tup_entity = []
@@ -46,5 +55,6 @@ class Level():
 			for x, entity in enumerate(line):
 				entity.display(fenetre, x, y)
 		perso.display(fenetre, perso.x, perso.y)
+		ennemy.display(fenetre, ennemy.x, ennemy.y)
 
 		pygame.display.flip()

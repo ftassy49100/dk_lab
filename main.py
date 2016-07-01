@@ -24,8 +24,9 @@ win = 0
 disp_menu=0
 menu = Menu()
 level = Level(1)
-perso = Perso(level)
-level.display_room(fenetre, perso)
+perso = level.perso
+ennemy = level.ennemy
+level.display_room(fenetre, perso, ennemy)
 	
 while continuer:
 	if disp_menu == 0:
@@ -37,13 +38,17 @@ while continuer:
 					disp_menu = 1
 				if event.key == K_DOWN:
 					perso.move("down")
+					ennemy.move("up")
 				if event.key == K_UP:
 					perso.move("up")
+					ennemy.move("down")
 				if event.key == K_LEFT:
 					perso.move("left")
+					ennemy.move("right")
 				if event.key == K_RIGHT:
 					perso.move("right")
-				level.display_room(fenetre, perso)
+					ennemy.move("left")
+				level.display_room(fenetre, perso, ennemy)
 		if (perso.x == level.banane.x) and (perso.y == level.banane.y):
 			win = 1
 
@@ -77,5 +82,5 @@ while continuer:
 						disp_menu = 0
 						stay = False
 						win = 0
-		level.display_room(fenetre, perso)
+		level.display_room(fenetre, perso, ennemy)
 
