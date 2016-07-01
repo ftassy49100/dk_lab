@@ -1,0 +1,13 @@
+cote_fenetre = 480
+titre_fenetre = "Jeu DK"
+image_icone = "img/dk_bas.png"
+background = "img/background.jpg"
+banana = "img/arrivee.png"
+start = "img/depart.png"
+wall = "img/mur.png"
+dk_left = "img/dk_gauche.png"
+dk_right = "img/dk_droite.png"
+dk_up = "img/dk_haut.png"
+dk_down = "img/dk_bas.png"
+perso = "img/dk_bas.png"
+dk_win = "img/win.png"
