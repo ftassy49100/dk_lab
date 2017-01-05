@@ -97,9 +97,9 @@ class Level_new():
 	def cells_around(self, cell):
 		_cells_around = [cell, cell, cell, cell]
 		if not cell.wall_up:
-			_cells_around[0] = (self.tuple_level[self.tuple_level.index(cell) - 3])
+			_cells_around[0] = (self.tuple_level[self.tuple_level.index(cell) - self.size])
 		if not cell.wall_down:
-			_cells_around[1] = (self.tuple_level[self.tuple_level.index(cell) + 3])
+			_cells_around[1] = (self.tuple_level[self.tuple_level.index(cell) + self.size])
 		if not cell.wall_left:
 			_cells_around[2] = (self.tuple_level[self.tuple_level.index(cell) - 1])
 		if not cell.wall_right:

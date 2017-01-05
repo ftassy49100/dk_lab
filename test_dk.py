@@ -8,7 +8,7 @@ pygame.init()
 black = (0,0,0)
 white = (255,255,255)
 red = (255,0,0)
-level = Level_new(6)
+level = Level_new(16)
 perso = Perso(level, choice(level.tuple_level))
 fenetre = pygame.display.set_mode(((level.size) * 32, (level.size)*32))
 
