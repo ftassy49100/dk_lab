@@ -11,6 +11,7 @@ from entities.cell import *
 from pygame.locals import *
 from random import *
 from constantes import background, wall, banana, start
+import time
 
 class Level_new():
 	"""Classe définissant un Labyrinthe généré automatiquement
@@ -30,15 +31,9 @@ class Level_new():
 
 	def go_in_cell_arround(self, current_cell, cells_around):
 		new_cells_around = []
-		for i, cell in enumerate(cells_around):
-				print ('position des cells à côté : X {}, y {} (num {} dans la liste). Visitée : {}'.format(cell.x_pos, cell.y_pos, i, cell.visited))
-
 		for cell in cells_around:
 			if cell.visited == False:
 				new_cells_around.append(cell)
-		print ('après suppression reste les cellules : ')
-		for i, cell in enumerate(new_cells_around):
-				print ('position des cells à côté : X {}, y {} (num {} dans la liste). Visitée : {}'.format(cell.x_pos, cell.y_pos, i, cell.visited)) 
 		if new_cells_around:
 			next_cell = choice(new_cells_around)
 			if (next_cell.x_pos == current_cell.x_pos + 1):
@@ -60,19 +55,16 @@ class Level_new():
 		path_visited = [starting_cell]
 		current_cell = starting_cell
 		current_index = self.tuple_level.index(current_cell)
+		print ('cellule de départ ! (X : {}, Y : {}'.format(current_cell.x_pos, current_cell.y_pos)) 
 		while path_visited: # tant qu'on n'est pas revenu au point de départ
 			cells_around = []
 			if (current_cell.x_pos == 0 and current_cell.y_pos == 0): # pour en haut à gauche,  cases à côté = en à droite et en dessous
-				print ('cellule en haut à gauche')
 				cells_around = [self.tuple_level[current_index +1], self.tuple_level[current_index + self.size]]
 			elif (current_cell.x_pos == self.size -1 and current_cell.y_pos == self.size -1): # pour en bas à droite, à gauche et en haut
 				cells_around = [self.tuple_level[current_index - 1], self.tuple_level[current_index -self.size]]
 			elif (current_cell.x_pos == 0 and current_cell.y_pos == self.size -1): # pour en bas à gauche
-				print ("cellule en bas à gauche")
 				cells_around = [self.tuple_level[current_index + 1], self.tuple_level[current_index - self.size]]
-				print (cells_around)
 			elif (current_cell.y_pos == 0 and current_cell.x_pos == self.size -1): # pour en haut à droite
-				print ('cellule en haut à droite')
 				cells_around = [self.tuple_level[current_index -1], self.tuple_level[current_index +self.size]]
 			elif (current_cell.x_pos == 0): # pour les murs de gauche
 				cells_around = [self.tuple_level[current_index +1], self.tuple_level[current_index + self.size], self.tuple_level[current_index - self.size]]
@@ -83,9 +75,7 @@ class Level_new():
 			elif (current_cell.y_pos == self.size -1): # pour les murs d'en bas
 				cells_around = [self.tuple_level[current_index -1], self.tuple_level[current_index + 1], self.tuple_level[current_index - self.size]]
 			else:
-				print ('au milieu')
 				cells_around = [self.tuple_level[current_index -1], self.tuple_level[current_index +1], self.tuple_level[current_index + self.size], self.tuple_level[current_index - self.size]]
-			print ('current cell : X {}, Y {}'.format(current_cell.x_pos, current_cell.y_pos))
 			next_cell = self.go_in_cell_arround(current_cell, cells_around) # on se déplace jusqu'à la prochaine cell qui devient la cell courante
 			next_index = self.tuple_level.index(next_cell)  #on modifie l'index de la cell courante
 			if path_visited[-1] == next_cell: # Si on est resté sur la même cell (pas de cells autour)
@@ -101,5 +91,14 @@ class Level_new():
 				print ('nous sommes maintenant en X {}, Y {}'.format(current_cell.x_pos, current_cell.y_pos))
 		return self.tuple_level
 
-
-
+	def display_room(self, fenetre, goal, perso):
+		disp_fond = pygame.image.load(background).convert_alpha()
+		fenetre.blit(disp_fond, (0,0))
+		for cell in self.tuple_level:
+			print ('cellule en X : {}, Y :{} ; mur du haut : {}, mur du bas : {}, mur de gauche : {} mur de droite : {}'.format(cell.x_pos, cell.y_pos, cell.wall_up, cell.wall_down, cell.wall_left, cell.wall_right))
+			cell.display_walls(fenetre, cell.x_pos, cell.y_pos)
+			time.sleep(0.1)
+		
+			pygame.display.flip()
+		pygame.display.flip()
+		

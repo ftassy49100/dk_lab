@@ -38,4 +38,18 @@ class Cell(Entity):
 			opposite_cell.wall_left = False
 		return self
 
-
+	def display_walls(self, fenetre, x, y):
+		if self.wall_up:
+			disp = pygame.image.load(wall_up).convert_alpha()
+			fenetre.blit(disp, (x * 32, y * 32))
+		if self.wall_down:
+			disp = pygame.image.load(wall_x).convert_alpha()
+			fenetre.blit(disp, (x * 32, (y * 32) + 32))
+		if self.wall_left:
+			disp = pygame.image.load(wall_y).convert_alpha()
+			fenetre.blit(disp, (x * 32, y * 32))
+		if self.wall_right:
+			disp = pygame.image.load(wall_right).convert_alpha()
+			fenetre.blit(disp, ((x * 32) + 32, y * 32))
+	def display():
+		return True

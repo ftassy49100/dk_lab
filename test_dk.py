@@ -1,14 +1,28 @@
-from constantes import cote_fenetre, titre_fenetre, image_icone
+from constantes import *
 import pygame
 from level_new import *
 from menu import *
 from entities import *
 from pygame.locals import *
+pygame.init()
+black = (0,0,0)
+white = (255,255,255)
+red = (255,0,0)
+level = Level_new(10)
 
-labyrinthe = Level_new(4);
+fenetre = pygame.display.set_mode(((level.size) * 32, (level.size)*32))
 
-for cell in labyrinthe.visit_cells():
-	print ('cellule en X : {}, Y :{} ; mur du haut : {}, mur du bas : {}, mur de gauche : {} mur de droite : {}'.format(cell.x_pos, cell.y_pos, cell.wall_up, cell.wall_down, cell.wall_left, cell.wall_right))
+pygame.display.flip()
+pygame.display.set_caption(titre_fenetre)
 
+icone = pygame.image.load(image_icone).convert_alpha()
+goal = 0
+continuer = 1
+win = 0
+disp_menu=0
+menu = Menu()
+level.visit_cells()
+level.display_room(fenetre)
+pygame.display.flip()
 
-
+input('quit')
