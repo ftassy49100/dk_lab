@@ -55,7 +55,6 @@ class Level_new():
 		path_visited = [starting_cell]
 		current_cell = starting_cell
 		current_index = self.tuple_level.index(current_cell)
-		print ('cellule de départ ! (X : {}, Y : {}'.format(current_cell.x_pos, current_cell.y_pos)) 
 		while path_visited: # tant qu'on n'est pas revenu au point de départ
 			cells_around = []
 			if (current_cell.x_pos == 0 and current_cell.y_pos == 0): # pour en haut à gauche,  cases à côté = en à droite et en dessous
@@ -79,7 +78,6 @@ class Level_new():
 			next_cell = self.go_in_cell_arround(current_cell, cells_around) # on se déplace jusqu'à la prochaine cell qui devient la cell courante
 			next_index = self.tuple_level.index(next_cell)  #on modifie l'index de la cell courante
 			if path_visited[-1] == next_cell: # Si on est resté sur la même cell (pas de cells autour)
-				print ('on est resté sur la même cellule ! (X : {}, Y : {}'.format(path_visited[-1].x_pos, path_visited[-1].y_pos))
 				path_visited.pop() # On supprime cette cell du chemin
 				if path_visited:
 					current_cell = path_visited[-1] # on prend la précédente cell en tant que cell courante
@@ -88,17 +86,22 @@ class Level_new():
 				current_cell = next_cell #on prend la prochaine cell en tant que cell courante
 				current_index = next_index #et on modifie l'index
 				path_visited.append(current_cell)
-				print ('nous sommes maintenant en X {}, Y {}'.format(current_cell.x_pos, current_cell.y_pos))
 		return self.tuple_level
 
-	def display_room(self, fenetre, goal, perso):
+	def display_room(self, fenetre):
 		disp_fond = pygame.image.load(background).convert_alpha()
 		fenetre.blit(disp_fond, (0,0))
 		for cell in self.tuple_level:
-			print ('cellule en X : {}, Y :{} ; mur du haut : {}, mur du bas : {}, mur de gauche : {} mur de droite : {}'.format(cell.x_pos, cell.y_pos, cell.wall_up, cell.wall_down, cell.wall_left, cell.wall_right))
 			cell.display_walls(fenetre, cell.x_pos, cell.y_pos)
-			time.sleep(0.1)
-		
 			pygame.display.flip()
-		pygame.display.flip()
-		
+	def cells_around(self, cell):
+		_cells_around = [cell, cell, cell, cell]
+		if not cell.wall_up:
+			_cells_around[0] = (self.tuple_level[self.tuple_level.index(cell) - 3])
+		if not cell.wall_down:
+			_cells_around[1] = (self.tuple_level[self.tuple_level.index(cell) + 3])
+		if not cell.wall_left:
+			_cells_around[2] = (self.tuple_level[self.tuple_level.index(cell) - 1])
+		if not cell.wall_right:
+			_cells_around[3] = (self.tuple_level[self.tuple_level.index(cell) + 1])
+		return _cells_around
