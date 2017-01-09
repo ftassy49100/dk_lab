@@ -2,11 +2,8 @@
 import os
 import pygame
 from entities.banana import *
-from entities.wall import *
-from entities.empty import *
 from entities.perso import *
 from entities.start import *
-from entities.ennemy import *
 from entities.cell import *
 from pygame.locals import *
 from random import *
