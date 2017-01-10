@@ -3,7 +3,11 @@ import os
 import pygame
 from entities.banana import *
 from entities.perso import *
+<<<<<<< HEAD
 from entities.ennemy import *
+=======
+from entities.start import *
+>>>>>>> ea4dea4cc519b9af8a23474d69ef4563191495f9
 from entities.cell import *
 from pygame.locals import *
 from random import *
