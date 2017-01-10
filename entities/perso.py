@@ -16,22 +16,27 @@ class Perso(Entity):
 		self.level = level
 		self.type = dk_down
 		self.cell = cell
+		self.last_cell = cell
 
 	def move(self, direction):
 		if direction == "up":
 			if not self.cell.wall_up:
+				self.last_cell = self.cell
 				self.cell = self.level.cells_around(self.cell)[0]
 				self.type = dk_up
 		elif direction == "down":
 			if not self.cell.wall_down:
+				self.last_cell = self.cell
 				self.cell = self.level.cells_around(self.cell)[1]
 				self.type = dk_down
 		elif direction == "left":
 			if not self.cell.wall_left:
+				self.last_cell = self.cell
 				self.cell = self.level.cells_around(self.cell)[2]
 				self.type = dk_left
 		elif direction == "right":
 			if not self.cell.wall_right:
+				self.last_cell = self.cell
 				self.cell = self.level.cells_around(self.cell)[3]
 				self.type = dk_right
 		print ('perso maintenant en {}, {}'.format(self.cell.x_pos, self.cell.y_pos))
@@ -39,3 +44,4 @@ class Perso(Entity):
 	def display(self, fenetre):
 		disp = pygame.image.load(self.type).convert_alpha()
 		fenetre.blit(disp, (self.cell.x_pos*32, self.cell.y_pos*32))
+		fenetre.blit(disp, (self.last_cell.x_pos*32, self.cell.y_pos*32))

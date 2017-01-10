@@ -2,6 +2,7 @@ cote_fenetre = 480
 titre_fenetre = "Jeu DK"
 image_icone = "resources/img/dk_bas.png"
 background = "resources/img/background.jpg"
+floor = "resources/img/background63.png"
 banana = "resources/img/arrivee.png"
 start = "resources/img/depart.png"
 wall = "resources/img/wall.bmp"

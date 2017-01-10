@@ -21,7 +21,7 @@ class Cell(Entity):
 		self.visited = False
 		self.x_pos = x_pos
 		self.y_pos = y_pos
-
+		self.type = floor
 
 	def remove_wall(self, direction, opposite_cell):
 		if direction == 'up':
@@ -51,5 +51,7 @@ class Cell(Entity):
 		if self.wall_right:
 			disp = pygame.image.load(wall_right).convert()
 			fenetre.blit(disp, ((x * 32) + 32, y * 32))
-	def display():
-		return True
+	def display(self, fenetre):
+		disp = pygame.image.load(self.type).convert_alpha()
+		fenetre.blit(disp, (self.x_pos*32, self.y_pos*32))
+		self.display_walls(fenetre, self.x_pos, self.y_pos)

@@ -2,10 +2,7 @@
 import os
 import pygame
 from entities.banana import *
-from entities.wall import *
-from entities.empty import *
 from entities.perso import *
-from entities.start import *
 from entities.ennemy import *
 from entities.cell import *
 from pygame.locals import *
@@ -92,6 +89,7 @@ class Level_new():
 		disp_fond = pygame.image.load(background).convert_alpha()
 		fenetre.blit(disp_fond, (0,0))
 		for cell in self.tuple_level:
+			cell.display(fenetre)
 			cell.display_walls(fenetre, cell.x_pos, cell.y_pos)
 			pygame.display.flip()
 	def cells_around(self, cell):
